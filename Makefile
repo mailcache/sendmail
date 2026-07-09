@@ -1,4 +1,4 @@
-VERSION=0.1.9
+VERSION=1.0.0
 
 all: deps release
 
@@ -6,9 +6,9 @@ deps:
 	go get github.com/spf13/pflag
 
 release: release-deps
-	gox -output="build/{{.Dir}}_{{.OS}}_{{.Arch}}" .
+	gox -osarch="!darwin/386" -output="build/{{.Dir}}_{{.OS}}_{{.Arch}}" .
 
 release-deps:
-	go get github.com/mitchellh/gox
+	go install github.com/mitchellh/gox@latest
 
 .PNONY: all release release-deps
